@@ -1,0 +1,212 @@
+%%%% 原overleaf模板参考北师大的LeyuDame
+\documentclass[11pt]{article}
+% disable indent globally
+\setlength{\parindent}{0pt}
+% some general improvements, defines the XeTeX logo
+\usepackage{xltxtra}
+\usepackage{bookmark}
+% use hyperlink for email and url
+\usepackage{hyperref}
+\hypersetup{hidelinks}
+\usepackage{url}
+\urlstyle{tt}
+\usepackage{multicol}
+\usepackage{comment}
+\usepackage{xcolor}
+%%%% 统一改成了学校的蓝色，尽显专业
+\definecolor{CVBlue}{RGB}{0,166,214} % 从校徽上取色
+
+%%% \widthof[]{} 用于特殊对齐是用到
+\usepackage{calc}
+%%%% 利用tikz来定位照片和学校Logo
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+% loading fonts
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\CJKsetecglue{} %% 取消中文与数字之间间隙
+
+\setmainfont[
+Path = Font/,
+  Extension = .otf ,
+  BoldFont = HelveticaNeueLTPro-Md.otf ,
+]{HelveticaNeueLTPro-Roman.otf}
+\setCJKmainfont[
+Path = Font/,
+  Extension = .otf ,
+BoldFont=ProGB18030 DemiBold.otf,
+]{ProGB18030.otf}
+%%%%% 定义更漂亮的“C++”，参考https://tex.stackexchange.com/questions/4302/prettiest-way-to-typeset-c-cplusplus 
+%%%%% 貌似跟具体字体大小有关，需要调下参数，我测试感觉下面的比较好看
+\usepackage{relsize}
+\usepackage{xspace}
+\protected\def\Cpp{{C\nolinebreak[4]\hspace{-.05em}\raisebox{.28ex}{\relsize{-1}++}}\xspace} 
+% use fontawesome
+\usepackage{fontawesome}
+%\newfontfamily{\FA}{[FontAwesome.otf]}
+\usepackage[
+	a4paper,
+	left=1.2cm,
+	right=1.2cm,
+	top=1.5cm,
+	bottom=1cm,
+	nohead
+]{geometry}
+\renewcommand{\baselinestretch}{1.2} %定义行间距1.2
+\usepackage{titlesec}
+\usepackage{enumitem}
+\setlist{noitemsep} % removes spacing from items but leaves space around the whole list
+%\setlist{nosep} % removes all vertical spacing within and around the list
+\setlist[itemize]{topsep=0.25em, leftmargin=*}
+\setlist[enumerate]{topsep=0.25em, leftmargin=*}
+\titleformat{\section}         % Customise the \section command 
+  {\large\bfseries\raggedright} % Make the \section headers large (\Large),
+                               % small capitals (\scshape) and left aligned (\raggedright)
+  {}{0em}                      % Can be used to give a prefix to all sections, like 'Section ...'
+  {}                           % Can be used to insert code before the heading
+  [{\color{CVBlue}\titlerule}]                 % Inserts a horizontal line after the heading
+\titlespacing*{\section}{0cm}{*1.6}{*1.2}
+\usepackage{siunitx}
+\usepackage{amssymb}
+%\xeCJKsetup{CJKspace=true}
+%\xeCJKDeclareCharClass{CJK}{`0 -> `9}    % 设置 0-9 以 CJK 字体输出
+%\normalspacedchars{0,1,2,3,4,5,6,7,8,9} % 0-9 的字符类被还原
+
+
+\begin{document}
+
+\pagenumbering{gobble} % suppress displaying page number
+%%%% 利用tikz来定位照片，部分招聘单位可能需要“以貌取人”
+\begin{tikzpicture}[remember picture, overlay]
+	\node[anchor = north east] at ($(current page.north east)+(-1cm,-1.2cm)$) {\includegraphics[height=3.8cm]{img/photo.jpg}};
+\end{tikzpicture}%
+
+%%%% 利用tikz来定位学校Logo，这里只在第一页显示，如果需要每页都有，可以考虑在页眉、页脚或者background中加入，不过简历也就一两页，无所谓了
+
+\begin{tikzpicture}[remember picture, overlay]
+	\node[anchor = north west] at ($(current page.north west)+(0.2cm,-0.2cm)$) {\includegraphics[height=3.5cm]{img/international-logo_rgb@16x.png}};
+\end{tikzpicture}%
+
+%%%% 利用tikz来定位页脚栏，电子版简历使用，黑白纸质打印效果可能并不好。这里只在第一页显示，如果需要每页都有，页脚或者background中加入。
+
+%\begin{tikzpicture}[remember picture, overlay] 
+%    \node[anchor = south,fill=CVBlue,draw=none,minimum width=\paperwidth,minimum height=1.5em,align=center,font=\footnotesize,text=white] at ($(current page.south)$) 
+%    {\faGithubAlt \ \href{https://github.com/leyudame}{https://github.com/leyudame}\qquad
+%        \faRssSquare \ \href{https://leyudame.github.io}{https://leyudame.github.io} };
+%\end{tikzpicture}
+
+%tikzpicture环境很敏感，注释周围的空格、空行都会引起水平距离或垂直距离的变化，
+%
+\centerline{\LARGE\bfseries{钱啸云}}
+
+%\centerline{\normalsize{意向岗位：模拟IC设计 \quad 专业：微电子}}
+\centerline{\normalsize{专业：微电子}}
+\centerline{\normalsize{
+    \faPhone \ +86 13816092395 \quad
+    \faPhone \ +31 682320671 \quad
+    \faEnvelopeO \ \href{mailto:qianxiaoyun2000@outlook.com}{qianxiaoyun2000@outlook.com}}}
+
+
+\section{\makebox[\widthof{\faGraduationCap}][c]{\color{CVBlue}\faGraduationCap}\  教育背景}
+
+\textbf{代尔夫特理工大学}（2023年9月至今）
+
+\qquad 硕士研究生 \quad 微电子，\quad 毕业论文题目：\emph{面向无线视觉皮层刺激的高效能多通道神经刺激系统设计}, 预计2026年7月毕业
+
+\textbf{荷兰HZ应用科技大学}（2022年2月 -- 2023年7月）
+
+\qquad HBO工程学学士  
+\quad 毕业论文题目：\emph{设计并制造锂电池组夹紧系统，并为激光焊接机集成视觉定位系统}
+
+\textbf{上海海事大学}（2019年9月 -- 2023年7月）
+
+\qquad 工学学士 \quad 机械电子工程
+
+
+\begin{comment}
+
+\end{comment}
+
+\section{\makebox[\widthof{\faGraduationCap}][c]{\color{CVBlue}\faBriefcase}\ 工作经历}
+    \begin{itemize}
+    \item \textbf{上海联影医疗科技有限公司}（2025年7-8月），中国上海，实习生
+    \begin{itemize}
+    \item 于MI-DET-DEA部门参与PET医疗影像传感器开发，负责"鲲鹏"和"麒麟"两个项目
+    \item 开展传感器电磁屏蔽性能测试与失效分析，定位EMI干扰源，提出改进方案提升信号完整性
+    \item 执行"鲲鹏"振动测试和"麒麟"环境强化测试（昆山实验室），参与失效分析并协助优化设计，验证医疗级可靠性
+    \end{itemize}
+
+	\item \textbf{EmergoStar B.V.}（2023年1-8月），荷兰特尔讷曾，电气工程师
+    \begin{itemize}
+    \item 设计可承载3000N夹紧力的电池包夹紧系统，通过力学仿真优化结构，提升电池组寿命
+    \item 利用3D打印制造测试工具，集成视觉定位系统于激光焊接平台，实现精确定位和模块化改进
+    \item 使用Arduino编程开发压力传感器测试平台，实时监测夹紧力分布，验证系统性能并缩短装配切换时间30\%以上
+\end{itemize}
+	\item \textbf{Lumileds （上海）管理有限公司}（2021年7-8月），中国上海，实习生
+    \begin{itemize}
+    \item 使用显微镜和热电焊台完成半导体光源芯片的高精度贴装，掌握精密焊接工艺
+    \item 利用恒流电源进行驱动测试，制作用于向客户展示LED光源性能的工程样品
+    \item 维护并更新公司内部产品数据服务器，提供更新日志及使用说明文档
+    \end{itemize}
+\end{itemize}
+
+\section{\makebox[\widthof{\faGraduationCap}][c]{\color{CVBlue}\faUniversity}\ 项目经历}
+\begin{itemize}
+\item \textbf{面向无线视觉皮层刺激的高效能多通道神经刺激系统设计}（2025年9月-2026年7月，进行中）
+    \begin{itemize}
+    \item \textbf{系统架构}：设计8通道神经刺激ASIC，支持1:8时分复用（TDM）驱动64电极，采用SPI接口实现通道配置，面向无线供电的皮层视觉假体应用
+    \item \textbf{低功耗层级式偏置架构}：全局bias block统一分发栅极电压至各通道电流镜，单通道功耗约20\,µW
+    \item \textbf{PI闭环控制器}：替代原开环放大器架构，消除稳态误差，提升负载切换时的系统稳定性
+    \item \textbf{主动反馈IDAC}：运放输出钳位隔离高压，第二级cascode采用2V器件提升速度，headroom从250mV降至60mV（降低76\%）
+    \item \textbf{Idle Controller}：检测多余headroom并自动关闭PI控制器与比较器，优化高$\rightarrow$低负载切换是系统运行效率
+    \item \textbf{CMLS架构Level Shifter}：解决原cross-coupled架构上升速度不足问题，将整流开关控制信号从毛刺波形优化为标准方波
+    \item \textbf{互补NMOS整流开关}：低压工况自动切换至NMOS导通，在5\,µA/20\,kΩ负载下效率提升150\%
+    \item \textbf{VCDL优化}：延迟调节范围从33ns-800ps优化至10ns-170ps（最小延迟降低70\%），支持快速TDM切换
+    \item \textbf{性能指标}：电流0-155\,µA（5\,µA步进），负载20-70\,kΩ，支持1-20\,nF电容负载，效率全面优于原系统且可下探至5\,µA，通过Monte Carlo及四工艺角仿真验证鲁棒性
+    \item \textbf{当前进度}：电路设计已完成，核心部分Layout已完成，预计四月二十号投片
+    \end{itemize}
+    \item \textbf{BiCMOS工艺制造与器件表征实验}（2025年）
+    \begin{itemize}
+        \item 完成完整BiCMOS工艺流程，包括热氧化、离子注入、光刻、湿法/干法刻蚀和金属化
+        \item 使用Synopsys Sentaurus进行工艺和器件仿真，预测掺杂分布和电学特性
+        \item 使用Keysight B1500A半导体分析仪表征NMOS/PMOS器件，提取阈值电压、迁移率和亚阈值摆幅
+        \item 进行方块电阻测量、ELM测量和横向扩散分析，验证仿真模型准确性
+    \end{itemize}
+    \item \textbf{高精度残差放大器设计}（2024-2025年）
+    \begin{itemize}
+        \item 设计两级全差分放大器，实现66 dB SNR、80.33 dB增益和24.88 ns建立时间
+        \item 开发Python脚本自动化LTspice仿真，实现参数提取、设计空间扫描和迭代优化
+        \item 采用米勒补偿优化频率响应，通过噪声-带宽权衡将功耗降至0.828 mW，FoM达-173.8 dB
+        \item 设计完整共模反馈和偏置网络，完成瞬态分析、噪声分析和性能验证
+    \end{itemize}
+    \item \textbf{Kaggle Titanic - Machine Learning from Disaster竞赛}（2023年）
+    \begin{itemize}
+        \item 使用PyTorch构建深度学习模型预测泰坦尼克号乘客生存率，进行特征工程和数据预处理
+        \item 实现多种机器学习算法对比，优化超参数提升模型性能
+        \item 最终排名559/14393（Top 4\%），准确率达到0.799
+    \end{itemize}
+
+
+    
+\end{itemize}
+
+
+\section{\makebox[\widthof{\faGraduationCap}][c]{\color{CVBlue}\faWrench}\ 工作技能}
+
+\begin{itemize}
+	\item 语言技能：英语四级，六级，日语四级，荷兰语A1
+	\item 编程技能：Python, Pytorch(Kaggle Titanic排名559/14393),  C++, \LaTeX, \ldots
+	\item 专业技能：LTspice, Cadence, MATLAB, Hspice, Jupyter notebook, Solidworks, Arduino.
+
+\end{itemize}
+
+%\section{\makebox[\widthof{\faGraduationCap}][c]{\color{CVBlue}\faTags}\ 其他}
+% increase linespacing [parsep=0.5ex]
+%爱好特长：读博
+
+
+%%%% 如果多页简历，可以手动在适当位置插入 \newpage 或者 \clearpage 开始新一页
+
+\end{document}
+
