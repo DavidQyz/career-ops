@@ -51,16 +51,17 @@ July – August 2021 | Shanghai, China
 
 **Design of an Energy-Efficient Multichannel Neural Stimulation System for Wireless Visual Cortex Stimulation** (September 2025 – July 2026, Ongoing) — MSc Thesis, TU Delft
 
-- **System Architecture:** Designed an 8-channel neural stimulation ASIC supporting 1:8 time-division multiplexing (TDM) to drive 64 electrodes, with SPI-based channel configuration for wirelessly powered cortical visual prosthesis applications
-- **Low-Power Hierarchical Biasing Architecture:** Implemented a global bias block distributing gate voltages to per-channel current mirrors, achieving approximately 20 µW static power consumption per channel
-- **PI Closed-Loop Controller:** Replaced the original open-loop amplifier architecture to eliminate steady-state error and improve system stability during load switching
-- **Active-Feedback IDAC:** Isolated high voltage via op-amp output clamping; employed 2 V devices in the second-stage cascode to improve speed, reducing headroom from 250 mV to 60 mV (76% reduction)
-- **Idle Controller:** Detected excess voltage headroom and automatically disabled the PI controller and comparator to optimize efficiency during high-to-low load transitions
-- **CMLS-Based Level Shifter:** Resolved insufficient rising-edge speed in the original cross-coupled architecture, optimizing rectifier switch control signals from glitch-prone waveforms to clean square waves
-- **Complementary NMOS Rectifier Switch:** Automatically switched to NMOS conduction under low-voltage conditions, achieving a 150% efficiency improvement at 5 µA / 20 kΩ load
-- **VCDL Optimization:** Optimized delay tuning range from 33 ns–800 ps to 10 ns–170 ps (70% reduction in minimum delay), enabling fast TDM switching
-- **Performance:** Output current 0–155 µA (5 µA step), load resistance 20–70 kΩ, support for 1–20 nF capacitive loads; overall efficiency superior to the original system and operational down to 5 µA; robustness verified via Monte Carlo and four process-corner simulations
-- **Current Status:** Circuit design and core layout completed; tape-out scheduled for April 20, 2026
+- **Process & Chip:** TSMC 180nm BCD; 8-channel ASIC in 2 × 2.5 mm die; tape-out April 2026; iterated on Varkevisser et al. (TCAS-I 2025) with 8 key architectural improvements
+- **System Architecture:** 8-channel neural stimulation ASIC with 1:8 TDM driving 64 electrodes; SPI-based per-channel configuration (current amplitude, electrode select, polarity) for wirelessly powered cortical visual prosthesis
+- **PI Closed-Loop Controller:** Replaced open-loop OTA with PI controller, eliminating steady-state headroom error; V_headroom regulated to 75 mV at 13.56 MHz sampling rate with ≥45° phase margin across all corners
+- **Active-Feedback IDAC:** Op-amp output clamping isolates high-voltage compliance; 2 V cascode devices in second stage reduce current sink headroom from 250 mV to 60 mV (76% reduction), directly improving power efficiency
+- **Complementary NMOS Rectifier Switch:** Auto-switches to NMOS conduction path under low-voltage conditions, achieving 150% efficiency improvement at 5 µA / 20 kΩ load
+- **Idle Controller:** Detects excess headroom (>200 mV) and disables comparator + PI controller during high-to-low load transitions, eliminating unnecessary switching losses
+- **CMLS-Based Level Shifter:** Resolved rising-edge speed limitation of cross-coupled architecture; rectifier switch control signals optimized from glitch-prone to clean square waves
+- **VCDL Optimization:** Tuning range narrowed from 33 ns–800 ps to 10 ns–170 ps (70% reduction in minimum delay), enabling fast TDM channel switching
+- **Low-Power Hierarchical Biasing:** Global bias block distributes gate voltages to per-channel current mirrors; per-channel local bias (V_REF 60 mV, V_REF_OUT 75 mV) prevents inter-channel crosstalk; ~20 µW static power per channel
+- **Layout:** Single-channel floorplan ~390 × 376 µm (~0.15 mm²); 8 channels total ~1.18 mm² (24% of die); Co (MOS+MIM stacked, 80 pF) is area-dominant block at 250 × 135 µm
+- **Performance:** Output current 0–155 µA (5 µA step, doubled vs. reference design), load 20–70 kΩ, capacitive loads 1–20 nF; robustness verified via Monte Carlo and four process-corner simulations
 
 **BiCMOS Process Fabrication and Device Characterization Laboratory** (2025)
 
@@ -90,3 +91,4 @@ July – August 2021 | Shanghai, China
 - **Programming:** Python, PyTorch, C++, LaTeX
 - **EDA & Simulation:** Cadence Virtuoso, LTspice, HSPICE, Synopsys Sentaurus
 - **Other Tools:** MATLAB, Jupyter Notebook, SolidWorks, Arduino
+- **Process Experience:** TSMC 180nm BCD (thesis tape-out); BiCMOS full fabrication flow (lab)
